@@ -4,23 +4,23 @@
 - Container repository: AWS ECR
 
 ## Requirements :
-- Must have aws-cli installed and configured on your local machine
+- Must have **aws-cli** installed and configured on your local machine
 
-- Must have eksctl installed on your local machine
+- Must have **eksctl** installed on your local machine
 
-- Must have kubectl installed on your local machine
+- Must have **kubectl** installed on your local machine
 
-- Must have docker installed on your local machine
+- Must have **docker** installed on your local machine
 
 ## Creating docker image and pushing it to AWS ECR  :
-- Create a container repository nodejs-test on ECR
+- Create a container repository **nodejs-test** on ECR
 
 - Authenticate your docker client to your registry by ruuning the following command
 
 *aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 226026992666.dkr.ecr.us-east-1.amazonaws.com*
 
 
-- Move to docker-image directory and build the docker image by running the following command
+- Move to **docker-image** directory and build the docker image by running the following command
 
 *sudo docker build -t 226026992666.dkr.ecr.us-east-1.amazonaws.com/nodejs-test:latest .*
 
@@ -35,9 +35,9 @@
 *eksctl create cluster --name test --version 1.16 --region us-east-1 --nodegroup-name test-nodes --node-type t3.small --nodes 3 --nodes-min 1 --nodes-max 4 --ssh-access --ssh-public-key assignment --managed*
 
 ## Deploying metrics server on cluster :
-- Metrics server collects the cpu usage and memory usage by the pods and nodes, it is required by the horizontal pod autoscalar to autoscale the replicas of deployment based average cpu and memory usage. 
+- Metrics server collects the metrics of cpu and memory utilization by the pods and nodes, it is required by the horizontal pod autoscalar to autoscale the replicas of deployment based average cpu and memory utilization. 
 
-- Move to menifests directory and execute the following command
+- Move to **menifests** directory and execute the following command
 
 *kubectl apply -f components.yaml*
 
@@ -49,14 +49,14 @@
 *kubectl top pods*
 
 ## Deploying PriorityClass Object on cluster :
-- PriorityClass object defines the priority of the associated pod, priority is a integer value that is mapped to the priority class object. Highest value of user-defined priority class object can be 1000000000. 
+- PriorityClass object defines the priority of the associated pod, priority is a integer value that is mapped to the priority class object. Highest value of user-defined priority class object can be **1000000000.** 
 
-- Move to menifests directory and run the following command to deploy priority class first
+- Move to **menifests** directory and run the following command to deploy priority class first
 
 *kubectl apply -f priorityclass.yml*
 
 ## Deploying nodejs application on cluster :
-- Move to menifests directory and run the following command
+- Move to **menifests** directory and run the following command
 
 *kubectl apply -f deploy.yml*
 
@@ -77,7 +77,7 @@
 
 - Autoscales the replicas from 10 to 13 if average cpu utilization is more than 50% or average memory utilization is more than 60%.
 
-- Move to menifests directory and run the following command
+- Move to **menifests** directory and run the following command
 
 *kubectl apply -f hpa.yml*
 
@@ -86,6 +86,6 @@
 
 - Exposing the application on port 3000 to the internet.
 
-- Move to menifests directory and run the following command
+- Move to **menifests** directory and run the following command
 
 *kubectl apply -f service.yml*
