@@ -22,7 +22,7 @@
 
 - Move to docker-image directory and build the docker image by running the following command
 
-*sudo docker build -t 226026992666.dkr.ecr.us-east-1.amazonaws.com/nodejs-test:latest . *
+*sudo docker build -t 226026992666.dkr.ecr.us-east-1.amazonaws.com/nodejs-test:latest .*
 
 
 - Push the image to container registry by running the following command
@@ -79,7 +79,7 @@
 
 - Move to menifests directory and run the following command
 
-*kubectl apply -f hpa.yml
+*kubectl apply -f hpa.yml*
 
 ## Deploying load balancer service :
 - Load balancer service deploys the classic EC2 load balancer and load balances the traffic to the application.
@@ -88,4 +88,4 @@
 
 - Move to menifests directory and run the following command
 
-*kubectl apply -f service.yml
+*kubectl apply -f service.yml*
