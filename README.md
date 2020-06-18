@@ -15,13 +15,16 @@ Must have docker installed on your local machine
 # CREATING DOCKER IMAGE AND PUSHING IT AWS ECR :
 Create a container repository nodejs-test on ECR
 
+
 Authenticate your docker client to your registry by ruuning the following command
 
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 226026992666.dkr.ecr.us-east-1.amazonaws.com
 
+
 Move to docker-image directory and build the docker image by running the following command
 
 sudo docker build -t 226026992666.dkr.ecr.us-east-1.amazonaws.com/nodejs-test:latest .
+
 
 Push the image to container registry by running the following command
 
@@ -35,9 +38,11 @@ eksctl create cluster --name test --version 1.16 --region us-east-1 --nodegroup-
 # DEPLOYING METRICS SERVER ON CLUSTER :
 Metrics server collects the cpu usage and memory usage by the pods and nodes, it is required by the horizontal pod autoscalar to autoscale the replicas of deployment based average cpu and memory usage. 
 
+
 Move to menifests directory and execute the following command
 
 kubectl apply -f components.yaml
+
 
 After successfully deploying the metrics server run following commands to fetch the metrics of nodes and pods
 
@@ -48,6 +53,7 @@ kubectl top pods
 # DEPLOYING PriorityClass OBJECT ON CLUSTER :
 PriorityClass object defines the priority of the associated pod, priority is a integer value that is mapped to the priority class object. Highest value of user-defined priority class object can be 1000000000. 
 
+
 Move to menifests directory and run the following command to deploy priority class first
 
 kubectl apply -f priorityclass.yml
@@ -57,7 +63,7 @@ Move to menifests directory and run the following command
 
 kubectl apply -f deploy.yml
 
-Deployment Properties:
+# DEPLOYMENT PROPERTIES:
 
 Ensures that 10 replicas are running
 
@@ -74,6 +80,7 @@ Horizontal pod autoscalar auto scales the replicas of application based on cpu a
 
 Autoscales the replicas from 10 to 13 if average cpu utilization is more than 50% or average memory utilization is more than 60%.
 
+
 Move to menifests directory and run the following command
 
 kubectl apply -f hpa.yml
@@ -82,6 +89,7 @@ kubectl apply -f hpa.yml
 Load balancer service deploys the classic EC2 load balancer and load balances the traffic to the application.
 
 Exposing the application on port 3000 to the internet.
+
 
 Move to menifests directory and run the following command
 
