@@ -64,11 +64,11 @@
 
 - Ensures that 10 replicas are running
 
-- Uses custom image nodejs-test:latest from ECR container registry.
+- Uses custom image *nodejs-test:latest* from ECR container registry.
 
-- In spec.strategy, maxUnavailable=3 ensures that atleast 10-3=7 replicas are always running.
+- In *spec.strategy, maxUnavailable=3* ensures that atleast *10-3=7* replicas are always running.
 
-- priorityClassName = highestuserdefinedpriority, ensures that the pods are having higher priority than the daemonSet's pods.
+- *priorityClassName = highestuserdefinedpriority*, ensures that the pods are having higher priority than the daemonSet's pods.
 
 - All pods are limited to use a specific amount of cpu and memory.
 
